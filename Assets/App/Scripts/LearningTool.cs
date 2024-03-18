@@ -139,7 +139,7 @@ public class LearningTool : MonoBehaviour
 	void UpdateWriteButtonTextColor(bool dataChanged)
 	{
 		_dataChanged |= dataChanged;
-		transform.Find("Base/Info/write_text/Text").GetComponent<TMPro.TextMeshPro>().color = _dataChanged ? Color.red : Color.black;
+		transform.Find("Base/Info/write_text/Text").GetComponent<TMPro.TMP_Text>().color = _dataChanged ? Color.red : Color.black;
 	}
 
 	void Start()
@@ -162,16 +162,11 @@ public class LearningTool : MonoBehaviour
 			transform.Find("Base/Info/RawImage").GetComponent<RawImage>().texture = x.texture;
 			RefleshWords(false);
 			UpdateSelectedText();
-			
-			string words = string.Empty;
-			foreach ( var v in x.data.words ) words += v + ",";
-			words = words.Substring(0, words.Length - 1);
-			transform.Find("Base/Info/InputFieldWords").GetComponent<InputField>().text = words;
 		};
 
 		LearningItemWord.onValueChanged += x => {
 			UpdateSelectedWordText();
-			transform.Find("Base/Info/InputField").GetComponent<InputField>().text = x.Label;
+			transform.Find("Base/Info/InputField").GetComponent<TMPro.TMP_InputField>().text = x.Label;
 		};
 				
 		transform.Find("Base/Info/del_selected_word_all").GetComponent<Button>().onClick.AddListener(() => {
@@ -182,6 +177,7 @@ public class LearningTool : MonoBehaviour
 				}
 			}
 			RefleshWords(true);
+			UpdateWriteButtonTextColor(true);
 		});
 
 		transform.Find("Base/Info/del_selected_word_this").GetComponent<Button>().onClick.AddListener(() => {
@@ -233,7 +229,7 @@ public class LearningTool : MonoBehaviour
 		});
 
 		transform.Find("Base/Info/add_word_head").GetComponent<Button>().onClick.AddListener(() => {
-			var word = transform.Find("Base/Info/InputField").GetComponent<InputField>().text;
+			var word = transform.Find("Base/Info/InputField").GetComponent<TMPro.TMP_InputField>().text;
 			if ( !string.IsNullOrEmpty(word)) {
 				foreach ( var v in _allImage ) {
 					if ( !v.isOn ) continue;
@@ -248,7 +244,7 @@ public class LearningTool : MonoBehaviour
 		});
 		
 		transform.Find("Base/Info/add_word_tail").GetComponent<Button>().onClick.AddListener(() => {
-			var word = transform.Find("Base/Info/InputField").GetComponent<InputField>().text;
+			var word = transform.Find("Base/Info/InputField").GetComponent<TMPro.TMP_InputField>().text;
 			if ( !string.IsNullOrEmpty(word)) {
 				foreach ( var v in _allImage ) {
 					if ( !v.isOn ) continue;
