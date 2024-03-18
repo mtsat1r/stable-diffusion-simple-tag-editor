@@ -1,5 +1,7 @@
 # stable-diffusion-simple-tag-editor
 
+![ss](./ss.jpg)
+
 ## What is this?
 
 This is an editor for tagging image datasets.
@@ -7,7 +9,7 @@ This application assumes that images and txt are placed in the same folder hiera
 
 ## Usage
 
-1. `open dir`:
+1. `open dir`
 2. edit tags
    - `current word`: currently focuse tag word
    - `add word to selected image head tag `: append current word to the top of tag-list of the selected images
